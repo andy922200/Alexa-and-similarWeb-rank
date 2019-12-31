@@ -6,7 +6,7 @@
 
 <h4 align="center"> Alexa and SimilarWeb Rank - Google 擴充套件 </h3>
 <h5 align="center"> Alexa and SimilarWeb Rank - Google Extension</h3>
-<a href="#about-this-project">
+<a target="_blank" href="https://chrome.google.com/webstore/detail/alexa-and-similarweb-rank/ikompppmnedgfglopochecapchmlehle">
   <p align="center">Click here to download page</p>
 </a>
 
