@@ -1,5 +1,6 @@
 const ALEXA_BASE_URL = 'https://data.alexa.com/data?cli=10&url='
 const SIMILARWEB_BASE_URL = 'https://data.similarweb.com/api/v1/data?domain='
+const corsServer = 'https://cors-sml.herokuapp.com'
 const show_Alexa_Link = document.querySelector('#alexa .row:nth-child(1) .link')
 const show_Alexa_GLO_Number = document.querySelector('#alexa .row:nth-child(2) .left p')
 const show_Alexa_LOC_Number = document.querySelector('#alexa .row:nth-child(2) .right')
@@ -11,7 +12,7 @@ const inputUrl = document.querySelector('#url')
 function fetchAlexa(inputAddress) {
   let result = {}
   return new Promise((resolve, reject) => {
-    fetch("https://cors-anywhere.herokuapp.com/" + ALEXA_BASE_URL + inputAddress, {})
+    fetch(`${corsServer}/${ALEXA_BASE_URL}${inputAddress}`, {})
       .then((response) => {
         if (!response.ok) return resolve(result)
         return response.text();
@@ -45,7 +46,7 @@ function fetchAlexa(inputAddress) {
 function fetchSimilarWeb(inputAddress) {
   let result = {}
   return new Promise((resolve, reject) => {
-    fetch("https://cors-anywhere.herokuapp.com/" + SIMILARWEB_BASE_URL + inputAddress, {})
+    fetch(`${corsServer}/${SIMILARWEB_BASE_URL}${inputAddress}`, {})
       .then((response) => {
         if (!response.ok) return resolve(result)
         return response.json();

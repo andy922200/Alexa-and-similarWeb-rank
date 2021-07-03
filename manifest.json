@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Alexa-and-similarWeb-rank",
   "description": "Looking for your website rank from the alexa and similarWeb with a simple click.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "icons": {
     "16": "rank-16.png",
     "48": "rank-48.png",
