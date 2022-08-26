@@ -1,6 +1,6 @@
 const ALEXA_BASE_URL = 'https://data.alexa.com/data?cli=10&url='
 const SIMILARWEB_BASE_URL = 'https://data.similarweb.com/api/v1/data?domain='
-const corsServer = 'https://cors-sml.herokuapp.com'
+const corsServer = 'https://cors.smlpoints.workers.dev'
 const show_Alexa_Link = document.querySelector('#alexa .row:nth-child(1) .link')
 const show_Alexa_GLO_Number = document.querySelector('#alexa .row:nth-child(2) .left p')
 const show_Alexa_LOC_Number = document.querySelector('#alexa .row:nth-child(2) .right')
@@ -12,7 +12,7 @@ const inputUrl = document.querySelector('#url')
 function fetchAlexa(inputAddress) {
   let result = {}
   return new Promise((resolve, reject) => {
-    fetch(`${corsServer}/${ALEXA_BASE_URL}${inputAddress}`, {})
+    fetch(`${corsServer}/?${ALEXA_BASE_URL}${inputAddress}`, {})
       .then((response) => {
         if (!response.ok) return resolve(result)
         return response.text();
@@ -46,7 +46,7 @@ function fetchAlexa(inputAddress) {
 function fetchSimilarWeb(inputAddress) {
   let result = {}
   return new Promise((resolve, reject) => {
-    fetch(`${corsServer}/${SIMILARWEB_BASE_URL}${inputAddress}`, {})
+    fetch(`${corsServer}/?${SIMILARWEB_BASE_URL}${inputAddress}`, {})
       .then((response) => {
         if (!response.ok) return resolve(result)
         return response.json();
@@ -59,15 +59,14 @@ function fetchSimilarWeb(inputAddress) {
   })
 }
 
-function fetchURL() {
-  let result = ''
-  return new Promise((resolve, reject) => {
-    chrome.tabs.getSelected((tab) => {
-      let url = new URL(tab.url)
-      result = url.hostname
-      resolve(result)
-    })
-  })
+async function fetchURL() {
+  try{
+    let queryOptions = { active: true, currentWindow: true }
+    let [tab] = await chrome.tabs.query(queryOptions)
+    return tab ? new URL(tab.url).hostname: ''
+  }catch(err){
+    console.log(err)
+  }
 }
 
 (async () => {
